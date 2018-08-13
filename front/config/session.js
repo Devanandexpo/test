@@ -30,11 +30,15 @@ module.exports.session = {
    * the example below is for 24 hours                                        *
    *                                                                          *
    ***************************************************************************/
-
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     //  path: '/',
     // httpOnly: true,
     // secure: false,
+    path: '/api',
+    httpOnly: true,
+    secure: true,
     maxAge: null,
   },
   /***************************************************************************

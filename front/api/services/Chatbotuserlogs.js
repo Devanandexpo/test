@@ -81,5 +81,29 @@ var model = {
 
         });
     },
+    checkloginstatus:function (data, callback) {
+        Chatbotuserlogs.findOne({
+            userid:data.userid
+        }).sort([['createdAt', -1]]).limit(1).exec(function(err, docs) { 
+            if (err) {
+                callback(err, null);
+            } 
+            else {
+                if (docs) {
+                    if(docs.token==data.data)
+                        callback(null, docs);
+                    else
+                        callback({
+                            message: "-1"
+                        }, null);
+                } else {
+                    callback({
+                        message: "-1"
+                    }, null);
+                }
+            }
+
+        });
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

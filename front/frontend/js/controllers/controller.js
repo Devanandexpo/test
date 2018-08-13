@@ -589,7 +589,7 @@
 		createAndSetupClient();*/
     })
 
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$interval,Idle,$window,$filter,$stateParams,rememberMeService,$cookies,myCache,$location) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$interval,Idle,$window,$filter,$stateParams,rememberMeService,$cookies,myCache,$location,toastr) {
         $scope.orientation = "";
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -682,6 +682,20 @@
         if($scope.at && !$rootScope.gotsession) {
             $scope.getsessiondata();
         }
+        $scope.checkloginstatus = function() {
+            if($scope.at) {
+                apiService.checkloginstatus({data:$.jStorage.get('accesstoken'),userid:$rootScope.userid}).then(function (response){
+                    if(!response.data.data) {
+                        toastr.error('Your session has ended', '', {timeOut: 5000});
+                        $scope.logout();
+                    }
+                });
+            }
+        };
+        var cls=$interval(function(){
+            $scope.checkloginstatus();
+            
+        },120000);
         $scope.activatechattab = function() {
 			$scope.chat_tab = 1;
 		};
@@ -1204,6 +1218,7 @@
         }
 		$scope.$on('$destroy', function () {
 		  $interval.cancel($scope.promise);
+          $interval.cancel(cls);
 		});
         $scope.openQueries = function(fullautolist,app_name) {
 			$scope.activatechattab();

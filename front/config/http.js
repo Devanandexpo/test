@@ -63,7 +63,7 @@ module.exports.http = {
 				scriptSrc: ["'self'", "'unsafe-inline'"],
 				styleSrc: ["'self'", "'unsafe-inline'"],
 				fontSrc: ["'self'", 'fonts.com'],
-				imgSrc: ["'self'"],
+				imgSrc: ["'self'",'data:'],
 				sandbox: ['allow-forms', 'allow-scripts','allow-same-origin','allow-modals'],
 				frameSrc: ['10.192.77.52','https://qliksenseprod1.mahindra.com'],
 				'object-src': ['*','data:'],
