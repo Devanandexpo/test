@@ -1,0 +1,50 @@
+{
+    "title": "Create Autoprompt",
+    "name": "App",
+    "jsonPage": "viewQlikautoprompt",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Chatbotautocomplete"],
+    "fields": [{
+        "name": "Question",
+        "type": "text",
+        "tableRef": "questions",
+        "placeholder": "Enter Query",
+        "id": "questions",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "App",
+        "type": "tags",
+        "dropDownType": "single",
+        "dropDownField": "appname",
+        "tableRef": "qlikapp",
+        "searchApi": "searchCall",
+        "placeholder": "Select App",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": "Qlikapp/search"
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitQlikautoprompt",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewAutocomplete"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewAutocomplete"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Chatbotautocomplete/save"
+    }
+}

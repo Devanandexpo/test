@@ -1,0 +1,26 @@
+{
+    "title": "Failed Login",
+    "description": "List of Failed login attempt",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Userid",
+        "isSort": "",
+        "tableRef": "userid"
+    }, {
+        "name": "IPAddress",
+        "isSort": "",
+        "tableRef": "ip_address"
+    }, {
+        "name": "Login Date",
+        "isSort": "",
+        "tableRef": "login_date"
+    }],
+    "action": [],
+    "button": [],
+    "apiCall": {
+        "url": "Failedlogin/search",
+        "params": "_id"
+    }
+}

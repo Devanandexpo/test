@@ -1,0 +1,4 @@
+myApp.service('ChatwindowService', function () {
+    
+
+});

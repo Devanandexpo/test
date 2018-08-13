@@ -1,0 +1,841 @@
+<div id="chat_window_1" class="chat_window_1  mahindra_chat" ng-controller="ChatCtrl" chatbotHeight>
+		
+	<div class="panel panel-primary " id="chat_panel" ng-init="chat_tab = 1" ng-style="{'height':panelheight+ 'px'}">
+			
+		<div class="panel-heading container-fluid" id="accordion">
+			<div class="mahindra_logo">
+				<img src="img/mahindra_logo.jpg" class="img-responsive">
+				<!-- <div  itemscope="" class="logo-wrap">
+						<a itemprop="url" href="http://www.mahindra.com"><img class="logo" alt="Brand" src="http://www.mahindra.com/resources/img/logo.png" itemprop="logo"></a>
+						</div> -->
+			</div>
+			<ul class="nav nav-tabs" id="chatTabs">
+				<li ng-class="{active:chat_tab==1}" data-toggle="tab" data-view="conver" ng-click="chat_tab=1">
+					<a href="#chattab">Conversation </a>
+				</li>
+				<li ng-class="{active:chat_tab==2}" data-toggle="tab" data-view="dashboard" ng-click="chat_tab=2">
+					<a href="#dashboard">Dashboard</a>
+				</li>
+				<li data-toggle="tab" ng-class="{active:chat_tab==3}" data-view="gridview" ng-click="chat_tab=3">
+					<a href="#gridview">Story Board</a>
+				</li>
+			</ul>
+
+			<div class="btn-group pull-right panel-right">
+				<!--<span class="lastlogin" ng-if="isLoggedin" uib-tooltip="Last Login : {{lastlogindate}}" tooltip-placement="bottom" tooltip-trigger="'mouseenter'">
+					
+					<i class="glyphicon glyphicon-info-sign"></i>
+				</span>-->
+				<a type="button" class="btn btn-default btn-xs hidden" href="#">
+					<span id="minim_chat_window " class="glyphicon glyphicon-minus icon_minim"></span>
+				</a>
+				<div class="dropdown toolbaroption" ng-if="isLoggedin">
+					<a class="btn btn-default dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					    aria-expanded="true">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+						<li>
+							<a class="" ng-click="openTopQueries();">
+								<span class="glyphicon glyphicon-question-sign"></span> &nbsp;Top Queries
+							</a>
+						</li>
+
+						<li>
+							<a class="" ng-click="getkpi();">
+								<span class="glyphicon glyphicon-book"></span> &nbsp;KPI
+							</a>
+						</li>
+						<!--<li>
+							<a class="" ng-click="selectApp();">
+								<span class="glyphicon glyphicon-tags"></span> &nbsp;My Apps
+							</a>
+						</li>-->
+						<li>
+							<a class="" ng-click="changevoicestatus();">
+								<span ng-if="voiceenabled">
+									<span class="glyphicon glyphicon-volume-up"></span> &nbsp;Mute Audio
+								</span>
+								<span ng-if="!voiceenabled">
+									<span class="glyphicon glyphicon-volume-off"></span> &nbsp;Enable Audio
+								</span>
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="deletegraph();">
+								<span class="glyphicon glyphicon-remove-sign"></span> &nbsp;Delete Graph
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="opensaveBookmark();">
+								<span class="glyphicon glyphicon-star-empty"></span> &nbsp;Save Bookmark
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="openviewBookmark();">
+								<span class="glyphicon glyphicon-star"></span> &nbsp;Load Bookmark
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="opendeleteBookmark();">
+								<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Delete Bookmark
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="clearChat();">
+								<span class="glyphicon glyphicon-trash"></span> &nbsp;Clear Chat
+							</a>
+						</li>
+						<li>
+							<a class="" ng-click="openMailmodal();">
+								<span class="glyphicon glyphicon-envelope"></span> &nbsp; Mail
+							</a>
+						</li>
+						<li ng-if="gridview" class="gridmenu">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-th"></span> &nbsp; Grid
+
+							</a>
+							<ul class="griddropdown dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li>
+									<a href="#" ng-click="col4();">4 Column</a>
+								</li>
+								<li>
+									<a href="#" ng-click="col3();">3 Column</a>
+								</li>
+								<li>
+									<a href="#" ng-click="col2();">2 Column</a>
+								</li>
+							</ul>
+						</li>
+						<!--<li ng-if="!fullscreen" >
+							<a class="hidden-xs"  ng-click="fullWindow();" type="button">
+								<span class="glyphicon glyphicon-blackboard"></span> Full Screen
+							</a>
+						</li>
+						<li ng-if="isresized">
+							<a class="" ng-click="resizeWindow();">
+								<span class="glyphicon glyphicon-blackboard"></span> &nbsp; Resize
+							</a>
+						</li>-->
+						<!--<li>
+							<a ng-if="isLoggedin" class=" " ng-click="openChangePwd();">
+								<span class="glyphicon glyphicon-lock"></span> &nbsp; Change Password
+							</a>
+						</li>-->
+						<li>
+							<a ng-if="isLoggedin" class=" logoutbtn" ng-click="logout();">
+								<span class="glyphicon glyphicon-off"></span> &nbsp; Logout
+							</a>
+						</li>
+
+					</ul>
+					<!-- <button class="btn btn-xs btn-info hidden-xs" ng-if="isresized" ng-click="resizeWindow();" type="button"><span class="glyphicon glyphicon-blackboard"></span> Default Size</button> -->
+					<!--<button class="btn btn-xs btn-info hidden-xs" ng-if="!fullscreen"  ng-click="fullWindow();" type="button"><span class="glyphicon glyphicon-blackboard"></span> Full Screen</button>-->
+
+
+				</div>
+				<a class="btn btn-xs btn-info hidden-xs" ng-if="isresized && isLoggedin" ng-click="resizeWindow();">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+					</a>
+					<a class="btn btn-xs btn-info hidden-xs" ng-if="!fullscreen && isLoggedin"  ng-click="fullWindow();">
+						<span class="glyphicon glyphicon-unchecked"></span>
+					</a> 
+				<a type="button" class="btn btn-default btn-xs" ng-click="minimizeChatwindow();" href="#">
+					<span class="glyphicon glyphicon-minus icon_close" data-id="chat_window_1"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="" ng-if="isforgotlogin && !isLoggedin">
+			<div class="container-fluid">
+				<div class="container-fluid">
+					<div class="col-sm-8 col-sm-offset-2 col-xs-12">
+						<div class="login">
+							<div class="login-container">
+								<h1 class="text-center">Change Password</h1>
+								<br>
+								<form id="forgotpassword_form" name="forgotpassword_form" autocomplete='off'>
+									<div class="form-group">
+										<div class="pull-left" ng-if="fchangepasswordSuccess==1">
+											<span class="label label-success">Password Changed Successfully.</span>
+										</div>
+										<input class="form-control newpassword" type="password" name="newpassword" id="newpassword" placeholder="New Password" ng-model="user.newpassword"
+										    required>
+										<div class="pull-right" ng-repeat="(field,value) in forgotpassword_form.newpassword.$error" ng-show="forgotpassword_form.newpassword.$touched">
+											<span class="label label-danger" ng-if="field=='required' && value">Please Enter New Password</span>
+										</div>
+										<input class="form-control newpassword2" type="password" name="newpassword2" id="newpassword2" placeholder="Confirm Password"
+										    ng-model="user.newpassword2" required valid-password-c="user.newpassword">
+										<div class="pull-right" ng-repeat="(field,value) in forgotpassword_form.newpassword2.$error" ng-show="forgotpassword_form.newpassword2.$touched">
+											<span class="label label-danger" ng-if="(field=='required' && value) ">Please Enter confirmation Password</span>
+										</div>
+										<div class="pull-right" ng-show="forgotpassword_form.newpassword2.$error.noMatch">
+											<span class="label label-danger">New Password does not match with confirmation password</span>
+										</div>
+										<div class="pull-right" ng-show="expired">
+											<span class="label label-danger">Change Password request expired.</span>
+										</div>
+										<div class="pull-right" ng-if="floginerror==-1">
+											<span class="label label-danger">No password reset request found</span>
+										</div>
+										<input class="form-control" id='forgotpwd' type="submit" name="forgotpwd" ng-disabled="forgotpassword_form.$invalid || expired==true"
+										    class="btn btn-primary btn-lg btn-block" value="Change" ng-click="fchangepassword(user.newpassword);">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid notlogin" ng-if="!isLoggedin && !isforgotlogin">
+			<div class="row">
+				<div class=" col-xs-12">
+					<div class="login">
+						<div class="login-container">
+							<!-- <img src="img/BlueStarLogo.png" class="img-responsive"> -->
+							<div class="login_text">LOGIN</div>
+							<!--<h1 class="text-center">Login</h1>-->
+							<br>
+							<form id="login_form" name="login_form" autocomplete='off'>
+								<div class="form-group">
+									<input class="form-control username2" focus id="username2" autocapitalize="none" type="text" name="username2" placeholder="UserID"
+									    ng-model="uname" required autocomplete="off">
+									<input class="form-control username" focus id="username" style="display:none;" autocapitalize="none" type="text" name="username"
+									    placeholder="UserID" autocomplete="off">
+									<!--<div class="pull-right" ng-repeat="(field,value) in login_form.username.$error" ng-show="login_form.username.$touched">
+                                            <span class="label label-danger" ng-if="field=='required' && value">Please Enter Valid Userid</span>
+                                        </div>-->
+									<input class="form-control userpassword2" focus type="password" autocapitalize="none" name="userpassword2" id="userpassword2"
+									    placeholder="Password" ng-model="upwd" required autocomplete='off'>
+									<input class="form-control userpassword" focus type="password" style="display:none;" autocapitalize="none" name="userpassword"
+									    id="userpassword" placeholder="Password" autocomplete='off'>
+									<!--<div class="pull-right" ng-repeat="(field,value) in login_form.userpassword.$error" ng-show="login_form.userpassword.$touched">
+                                            <span class="label label-danger" ng-if="field=='required' && value">Please Enter Password</span>
+                                        </div>-->
+									<div class="pull-right" ng-if="loginerror==-1">
+										<span class="label label-danger">Please Enter Valid username/Password</span>
+									</div>
+									<!-- <div class="pull-right" ng-if="!isLoggedin">
+										<span class="label label-danger">Please Login To Continue</span>
+									</div> -->
+									<label>
+										<input ng-click="rememberMe(uname,upwd)" class="rememberme" ng-model="remember" name="remember" type="checkbox"> Remember Me
+									</label>
+									<!-- ng-disabled="login_form.$invalid"-->
+									<input class="form-control" id='login' type="submit" name="login" ng-if="!loginpress" class="btn btn-primary btn-lg btn-block"
+									    value="Login" ng-click="login(uname,upwd);">
+								</div>
+							</form>
+							<!--
+                                <div class="login-help">
+                                    <a href="#" class="text-center" ng-click="openForgotpassword();">Forgot Password</a>
+                                </div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="powerbybottom animate_fade">
+				<div class="row">
+                        <div class="col-md-12">
+                            <div class="powerby">
+                                <p class="cals">POWERED BY</p>
+                            </div>
+                        </div>
+                    </div>
+					
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="powerbylogo qlik_logo">
+                                <img src="img/logo/qlik.png" class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="powerbylogo">
+                                <img src="img/logo/cingulariti.png" class="img-responsive">
+                            </div>
+                        </div>
+                    </div>
+					<!-- <div class="row">
+                        <div class="col-sm-12">
+                            <div class="powerbylogo">
+                                <img src="img/BlueStarLogo.png" class="img-responsive">
+                            </div>
+                        </div>
+                    </div> -->
+			</div>
+		</div>
+		<div class="container-fluid chatbody" ng-if="isLoggedin && qticket !==''">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel-body row" ng-style="{'height':chatpanelheight+ 'px'}">
+
+						
+						<div class="tab-content chattab-content" ng-style="chat_tab === 2 && {'overflow':'hidden'}">
+								
+							
+							<div class="tab-pane active row" id="chattab" ng-show="chat_tab === 1">
+								<ul class="chat chatmsgs col-md-12" ng-if="gotsession">
+									<li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index" ng-init="$rowindex = $index">
+										<span class="chat-img pull-{{list.position}}">
+											<img ng-src="img/{{list.position == 'left' && 'M_logo.PNG' || 'logo7.png'}}" alt="BOT" class="img-circle " />
+
+										</span>
+										<div class="chat-body">
+											<div class="clearfix" ng-if="list.position==='right'">
+												<p class="lastmsg">
+													<!-- <ng-bind-html ng-bind-html="list.msg"> -->
+														{{list.msg}}
+													<!-- </ng-bind-html> -->
+												</p>
+											</div>
+											<div class="" ng-if="list.position==='left' ">
+												<div class="checkbox graphcheckbox" ng-if="list.msg.type==='iframe' && list.msg.flag !== 1">
+													<label>
+														<input type="checkbox" class="selectcheck" value='{{list.msg.url}}' data-index="{{$rowindex}}" ng-true-value='{{list.msg.url}}'
+														    name="formailing[]">
+													</label>
+												</div>
+												<span class="thumbsgraphIcon" ng-if="list.msg.type==='iframe'">
+													<ul class="chatbottomtext hidden">
+														<li><span class="thumbsup glyphicon glyphicon-thumbs-up" ng-click="likeChatClick();"></span> </li>
+														<span class="thumbsdown glyphicon glyphicon-thumbs-down" ng-click="dislikeChatClick();"></span> </li>
+													</ul>
+												</span>
+												<div class="sysChatRes">
+													<div class="chatType" ng-if="list.msg.type==='iframe'">
+
+
+														<div class="scr{{$index}} srcs" id="scr{{$index}}" style="display:flow-root;">
+															<!--&& list.msg.text =='All the selections have been cleared'-->
+															<p ng-if="list.msg.text !=='' " class="systext">
+																{{list.msg.text}}
+															</p>
+															<!--  sb-load="iframeLoadedCallBack($event)" onLoad="uploadDone();" iframe-onload="iframeLoadedCallBack()" -->
+															<!--
+																			<object  id="myframe{{$index}}" data="{{trustSrcwithticket(list.msg.url)}}" class="framechart newframe" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5  && list.msg.flag !== 1 " ng-style="list.msg.flag === 1 && {'display':'none'}  || list.msg.flag === 3 && {'height':'20px'}" iframe-onload> 
+																				<embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
+																			</object>   
+																			-->
+					
+															<div class="" ng-if="list.msg.buttons1.length > 0 && list.msg.flag!==1">
+																<div  class="listbtn3 listbtns listbtn1" data-bgstage="{{kpiobj}}" ng-repeat="kpiobj in list.msg.buttons1" ng-click="pushMsg(0,kpiobj,backendurl);">
+																	<p>    
+																		{{kpiobj}}    
+																	</p>
+																</div>
+															</div>
+															<div class="" ng-if="list.msg.buttons2.length > 0 && list.msg.flag==2" style="overflow-y:hidden;height:50px;">
+																<iframe ng-src="{{trustSrcwithticket(list.msg.buttons2[0])}}" class="btnframe"></iframe>
+															</div>
+															<button class="btn  btn-primary" ng-if="list.msg.date_filter && list.msg.date_filter != ''" ng-click="opendatefilter(list.msg.date_filter[0]);" type="button">Date Filter</button>
+															<iframe id="myframe{{$index}}" ng-src="{{trustSrcwithticket(list.msg.url[0])}}" class="framechart newframe" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5 && list.msg.flag!==1 && list.msg.url.length == 1"
+																ng-style="list.msg.flag === 1 && {'display':'none'}  || list.msg.flag === 3 && {'height':'20px'}" iframe-onload ></iframe>
+															<div ng-if="list.msg.url.length > 1 && list.msg.flag!==1">
+																<div class='carousel slide' id='myCarousel{{$index}}'>
+																	<div class='carousel-inner'>
+																		<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.url track by $index" >
+																			<div class="col-xs-12" >
+																				<div class="">
+																					<iframe id="myframe{{$index}}" ng-src="{{trustSrcwithticket(imagelist);}}" class="framechart"   iframe-onload></iframe>  
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+																	<a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+																</div>
+															</div>
+															<p ng-if="list.msg.buttons3.length > 0 && list.msg.flag!==1">
+																Please select would you like to analyse further:
+															</p>
+															<!--<div ng-if="list.msg.buttons2.length > 0 && list.msg.flag!==1">
+																<p >Would you like to wish for work anniversary?</p>
+																<div  class="listbtn3 listbtns listbtn1"  ng-click="changemailbody();" style="max-width:20%;">Yes</div>
+															</div>-->
+															<div class="" ng-if="list.msg.buttons3.length > 0 && list.msg.flag!==1">
+																<div  class="listbtn3 listbtns listbtn1" data-bgstage="{{kpiobj}}" ng-repeat="kpiobj in list.msg.buttons3" ng-click="pushMsg(0,kpiobj,backendurl);">
+																	<p>    
+																		{{kpiobj}}    
+																	</p>
+																</div>
+															</div>
+															<!--
+															<div ng-if="list.msg.flag === 5">
+																
+																<div class='carousel slide' id='myCarousel{{$index}}'>
+																	<div class='carousel-inner'>
+																		<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.newurl track by $index">
+																			<div class="col-xs-12">
+																				<div class="">
+																					<object data="{{trustSrc(list.msg.newurl[$index]);}}" class="framechart">
+																						<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																					</object>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'>
+																		<i class='glyphicon glyphicon-chevron-left'></i>
+																	</a>
+																	<a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'>
+																		<i class='glyphicon glyphicon-chevron-right'></i>
+																	</a>
+																</div>
+															</div>-->
+														</div>
+														<!-- <div class="qlikdiv qvobject" id="qlikdiv">
+																		
+																		</div> -->
+													</div>
+												</div>
+											</div>
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_TOPQUES'))">
+												<h4 class="s_query">Frequently Asked Questions</h4>
+												<div class="quess" ng-repeat="que in list.msg.top_q track by $index">
+													<p class="faq_ques" ng-if="$index < 3">
+														<a data-id="" ng-click="getfaqans(que.questions,$index,que.qlikapp.appname);">
+
+															{{que.questions}}
+														</a>
+
+													</p>
+													<div class="faqmore" ng-if="$index >= 3" style="display:none;">
+														<p>
+															<a data-id="" ng-click="getfaqans(que.questions,$index,que.qlikapp.appname);">
+
+																{{que.questions}}
+															</a>
+														</p>
+													</div>
+
+												</div>
+												<div class="text-center">
+													<button type="button" class="btn btn-xs btn-info faqtoggle">{{faqviewbtn}}</button>
+												</div>
+											</div>
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_QUES'))">
+												<h4 class="s_query">What's on your mind today?</h4>
+												<div class="quess" ng-repeat="que in list.msg.fullautolist track by $index">
+													<p class="faq_ques" ng-if="$index < 3">
+														<a data-id="" ng-click="getfaqans(que.questions,$index,que.qlikapp.appname);">
+
+															{{que.questions}}
+														</a>
+
+													</p>
+													<div class="faqmore" ng-if="$index >= 3" style="display:none;">
+														<p>
+															<a data-id="" ng-click="getfaqans(que.questions,$index,que.qlikapp.appname);">
+
+																{{que.questions}}
+															</a>
+														</p>
+													</div>
+
+												</div>
+												<div class="text-center">
+													<button type="button" class="btn btn-xs btn-info faqtoggle">{{faqviewbtn}}</button>
+												</div>
+											</div>
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_KPI'))">
+												<p>Please select KPI</p>
+												<div class="dthyperlink changedthbg" data-bgstage="{{kpiobj}}" ng-repeat="kpiobj in list.msg.kpidata" ng-click="getmeasure(kpiobj,list.msg.appname);">
+													<p>
+														{{kpiobj}}
+													</p>
+												</div>
+											</div>
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_MEASURE'))">
+												<p>Please select Measure</p>
+												<div class="dthyperlink changedthbg" data-bgstage="{{measureobj}}" ng-repeat="measureobj in list.msg.measuredata" ng-click="getquery(measureobj,list.msg.appname);">
+													<p>
+														{{measureobj}}
+													</p>
+												</div>
+											</div>
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_KPIQUERY'))">
+												<p>Please select Query</p>
+												<div class="dthyperlink changedthbg" data-bgstage="{{queryobj.query}}" ng-repeat="queryobj in list.msg.querydata" ng-click="sendquery(queryobj,list.msg.appname);">
+													<p>
+														{{queryobj.query}}
+													</p>
+												</div>
+											</div>
+
+											<div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST' || list.msg.type==='SYS_EMPTY_RES'))">
+												<p class="lastmsg">
+													<!-- <ng-bind-html ng-bind-html="list.msg.Text"> -->
+														{{list.msg.Text}}
+													<!-- </ng-bind-html> -->
+												</p>
+											</div>
+											<p class="lastmsg">
+												<small class="chatTime">
+													<span class="glyphicon glyphicon-time">
+													</span>
+													{{list.curTime | date: 'HH:mm:ss a'}}
+												</small>
+											</p>
+										</div>
+									</li>
+								</ul>
+								<div class="loader" ng-show="showMsgLoader">
+									<img src="img/loading_dots.gif" class="img-responsive">
+								</div>
+								<!-- INput type  -->
+							</div>
+							<div class="tab-pane active row" id="dashboard" ng-if="chat_tab === 2" style="overflow: scroll !important;padding-left: 40px;padding-right: 20px;padding-bottom: 20px;padding-top: 20px;">
+								<!--
+									<object data="{{trustSrc(dashboardurl);}}?qlikTicket={{qticket}}" class="framechart"   style="width: 1200px;height:620px !important;" ng-if="isLoggedin && dashboardurl != ''">
+										<embed ng-src="{{trustSrc(dashboardurl);}}"  > </embed>
+									</object> 
+									-->
+								<iframe id="" ng-src="{{trustSrcwithticket(dashboardurl);}}" class="framechart" style="width: 1200px;height:620px !important;"
+								    ng-if="isLoggedin && dashboardurl != ''"></iframe>
+
+								<!-- <iframe ng-src="{{trustSrc(dashboardurl);}}" ng-style="chat_tab === 2 && {'height':chatpanelheight+'px'}" style="width:1200px !important;height:500px"></iframe> -->
+							</div>
+							<div class="tab-pane active row" id="gridview" ng-show="chat_tab === 3">
+								<!-- <div class="col-md-12">
+										<div class="gridstrip">
+											<button class="btn btn-xs 4col" type="button" ng-click="col4();">4 Column</button>
+											<button class="btn btn-xs 3col" type="button" ng-click="col3();">3 Column</button>
+											<button class="btn btn-xs 2col" type="button" ng-click="col2();">2 Column</button>
+										</div>
+									</div> -->
+								<div class="tabcol4 col-md-12" ng-if="showcol4">
+									<div class="row">
+										<!--(chatlist[$index].msg.type!=='SYS_FIRST' || chatlist[$index].msg.type!=='SYS_INACTIVE' || chatlist[$index].msg.type!=='SYS_EMPTY_RES')  -->
+										<div class="col-md-3 " ng-repeat="list in chatlist track by $index" ng-if="chatlist[$index].position=='left' &&  chatlist[$index].msg.type=='iframe' && list.msg.flag !== 1 && list.msg.url.length > 0">
+											<div class="row sysbg">
+												<!-- <div class="clearfix " ng-if="list.position==='right'">
+														<p class="lastmsg" >
+															<ng-bind-html ng-bind-html = "list.msg">
+																{{list.msg}}
+															</ng-bind-html>
+														</p>
+													</div> -->
+												<div class=" clearfix " ng-if="list.position==='left'">
+													<div class="sysChatRes">
+														<div class="chatType" ng-if="list.msg.type==='iframe'">
+															<div class="checkbox gridcheckbox">
+																<label>
+																	<input type="checkbox" class="selectcheck" value="{{list.msg.url}}" ng-true-value="{{list.msg.url}}" name="formailing[]">
+																</label>
+															</div>
+															<!-- <div> -->
+															<p class="sysmsgtab">
+																{{list.msg.prevmsg}}
+															</p>
+															<!-- </div> -->
+															<div class="scr{{$index}}  scrgraph" id="scr{{$index}}">
+																<p ng-if="list.msg.text !==''" class="graphtext">
+																	{{list.msg.text}}
+																</p>
+																<object data="{{trustSrc(list.msg.url[0]);}}?qlikTicket={{qticket}}" class="framechart" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5 && list.msg.flag!==1 && list.msg.url.length == 1"
+																    ng-style="list.msg.flag === 1 && {'display':'none'}  || list.msg.flag === 3 && {'height':'20px'}">
+																	<embed ng-src="{{trustSrc(list.msg.url[0]);}}"> </embed>
+																</object>
+																<!--
+																<div ng-if="list.msg.flag === 5">
+																	<div class='carousel slide' id='myCarousel{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.newurl track by $index">
+																				<div class="col-xs-12">
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'>
+																			<i class='glyphicon glyphicon-chevron-left'></i>
+																		</a>
+																		<a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'>
+																			<i class='glyphicon glyphicon-chevron-right'></i>
+																		</a>
+																	</div>
+																</div>-->
+																<div ng-if="list.msg.url.length > 1">
+                                                                
+																	<div class='carousel slide' id='myCarouselg4{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.url track by $index" >
+																				<div class="col-xs-12" >
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" ng-if="list.msg.flag!==1" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																						<!--<iframe id="myframe{{$index}}" ng-src="{{trustSrcwithticket(imagelist);}}" class="framechart"   iframe-onload></iframe>  -->
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarouselg4{{$index}}' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+																		<a class='right carousel-control' href='#myCarouselg4{{$index}}' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+																	</div>
+																</div>
+															</div>
+															<!-- <div class="qlikdiv qvobject" id="qlikdiv">
+																
+																</div> -->
+														</div>
+													</div>
+													<!-- <div class=" clearfix " ng-if="(list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST' || list.msg.type==='SYS_EMPTY_RES')">
+															<p class="lastmsg sysmsgtab" >
+																<ng-bind-html ng-bind-html = "list.msg.Text">
+																	{{list.msg.Text}}
+																</ng-bind-html>
+															</p>
+														</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tabcol3 col-md-12" ng-if="showcol3">
+									<div class="row">
+										<!--(chatlist[$index].msg.type!=='SYS_FIRST' || chatlist[$index].msg.type!=='SYS_INACTIVE' || chatlist[$index].msg.type!=='SYS_EMPTY_RES')  -->
+										<div class="col-md-4 " ng-repeat="list in chatlist track by $index" ng-if="chatlist[$index].position=='left' &&  chatlist[$index].msg.type=='iframe' && list.msg.flag !== 1 && list.msg.url.length > 0">
+											<div class="row sysbg">
+												<!-- <div class="clearfix " ng-if="list.position==='right'">
+														<p class="lastmsg" >
+															<ng-bind-html ng-bind-html = "list.msg">
+																{{list.msg}}
+															</ng-bind-html>
+														</p>
+													</div> -->
+												<div class=" clearfix " ng-if="list.position==='left'">
+													<div class="sysChatRes">
+														<div class="chatType" ng-if="list.msg.type==='iframe'">
+															<div class="checkbox gridcheckbox">
+																<label>
+																	<input type="checkbox" class="selectcheck" value="{{list.msg.url}}" ng-true-value="{{list.msg.url}}" name="formailing[]">
+																</label>
+															</div>
+															<!-- <div> -->
+															<p class="sysmsgtab">
+																{{list.msg.prevmsg}}
+															</p>
+															<!-- </div> -->
+															<div class="scr{{$index}} scrgraph" id="scr{{$index}}">
+																<p ng-if="list.msg.text !==''" class="graphtext">
+																	{{list.msg.text}}
+																</p>
+																<object data="{{trustSrc(list.msg.url[0]);}}?qlikTicket={{qticket}}" class="framechart" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5 && list.msg.flag!==1 && list.msg.url.length == 1"
+																    ng-style="list.msg.flag === 1 && {'display':'none'}  || list.msg.flag === 3 && {'height':'20px'}">
+																	<embed ng-src="{{trustSrc(list.msg.url[0]);}}"> </embed>
+																</object>
+																<!--
+																<div ng-if="list.msg.flag === 5">
+																	<div class='carousel slide' id='myCarousel{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.newurl track by $index">
+																				<div class="col-xs-12">
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'>
+																			<i class='glyphicon glyphicon-chevron-left'></i>
+																		</a>
+																		<a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'>
+																			<i class='glyphicon glyphicon-chevron-right'></i>
+																		</a>
+																	</div>
+																</div>-->
+																<div ng-if="list.msg.url.length > 1">
+                                                                
+																	<div class='carousel slide' id='myCarouselg4{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.url track by $index" >
+																				<div class="col-xs-12" >
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" ng-if="list.msg.flag!==1" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																						<!--<iframe id="myframe{{$index}}" ng-src="{{trustSrcwithticket(imagelist);}}" class="framechart"   iframe-onload></iframe>  -->
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarouselg4{{$index}}' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+																		<a class='right carousel-control' href='#myCarouselg4{{$index}}' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+																	</div>
+																</div>
+															</div>
+															<!-- <div class="qlikdiv qvobject" id="qlikdiv">
+																
+																</div> -->
+														</div>
+													</div>
+													<!-- <div class=" clearfix " ng-if="(list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST' || list.msg.type==='SYS_EMPTY_RES')">
+															<p class="lastmsg sysmsgtab" >
+																<ng-bind-html ng-bind-html = "list.msg.Text">
+																	{{list.msg.Text}}
+																</ng-bind-html>
+															</p>
+														</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tabcol2 col-md-12" ng-if="showcol2">
+									<div class="row">
+										<div class="col-md-6 " ng-repeat="list in chatlist track by $index" ng-if="chatlist[$index].position=='left' &&  chatlist[$index].msg.type=='iframe' && list.msg.flag !== 1 && list.msg.url.length > 0">
+											<div class="row sysbg">
+												<!-- <div class="clearfix " ng-if="list.position==='right'">
+														<p class="lastmsg" >
+															<ng-bind-html ng-bind-html = "list.msg">
+																{{list.msg}}
+															</ng-bind-html>
+														</p>
+													</div> -->
+												<div class=" clearfix " ng-if="list.position==='left'">
+													<div class="sysChatRes">
+														<div class="chatType" ng-if="list.msg.type==='iframe'">
+															<div class="checkbox gridcheckbox">
+																<label>
+																	<input type="checkbox" class="selectcheck" value="{{list.msg.url}}" ng-true-value="{{list.msg.url}}" name="formailing[]">
+																</label>
+															</div>
+															<!-- <div> -->
+															<p class="sysmsgtab">
+																{{list.msg.prevmsg}}
+															</p>
+															<!-- </div> -->
+															<div class="scr{{$index}} scrgraph" id="scr{{$index}}">
+																<p ng-if="list.msg.text !==''" class="graphtext">
+																	{{list.msg.text}}
+																</p>
+																<object data="{{trustSrc(list.msg.url[0]);}}?qlikTicket={{qticket}}" class="framechart" ng-if="list.msg.url.length == 1 && list.msg.flag !== 4 && list.msg.flag !== 5 && list.msg.flag!==1"
+																    ng-style="list.msg.flag === 1 && {'display':'none'}  || list.msg.flag === 3 && {'height':'20px'}">
+																	<embed ng-src="{{trustSrc(list.msg.url[0]);}}"> </embed>
+																</object>
+																<!--
+																<div ng-if="list.msg.flag === 5">
+																	<div class='carousel slide' id='myCarousel{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.newurl track by $index">
+																				<div class="col-xs-12">
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'>
+																			<i class='glyphicon glyphicon-chevron-left'></i>
+																		</a>
+																		<a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'>
+																			<i class='glyphicon glyphicon-chevron-right'></i>
+																		</a>
+																	</div>
+																</div>-->
+																<div ng-if="list.msg.url.length > 1">
+                                                                
+																	<div class='carousel slide' id='myCarouselg4{{$index}}'>
+																		<div class='carousel-inner'>
+																			<div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.url track by $index" >
+																				<div class="col-xs-12" >
+																					<div class="">
+																						<object data="{{trustSrc(list.msg.newurl[$index]);}}" ng-if="list.msg.flag!==1" class="framechart">
+																							<embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"> </embed>
+																						</object>
+																						<!--<iframe id="myframe{{$index}}" ng-src="{{trustSrcwithticket(imagelist);}}" class="framechart"   iframe-onload></iframe>  -->
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<a class='left carousel-control' href='#myCarouselg4{{$index}}' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+																		<a class='right carousel-control' href='#myCarouselg4{{$index}}' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+																	</div>
+																</div>
+															</div>
+															<!-- <div class="qlikdiv qvobject" id="qlikdiv">
+																
+																</div> -->
+														</div>
+													</div>
+													<!-- <div class=" clearfix " ng-if="(list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST' || list.msg.type==='SYS_EMPTY_RES')">
+															<p class="lastmsg sysmsgtab" >
+																<ng-bind-html ng-bind-html = "list.msg.Text">
+																	{{list.msg.Text}}
+																</ng-bind-html>
+															</p>
+														</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row panel-footer" ng-show="chat_tab === 3 || chat_tab === 1 ">
+				<div class="col-md-12 ">
+					<div class="form-group typegroup">
+						<!-- <span  class="thumbsIcon">
+								<span class="chatbottomtext">Was this information useful ? 
+									<span class="thumbsup glyphicon glyphicon-thumbs-up" ng-click="likeChatClick();"></span>&nbsp; 
+									<span class="thumbsdown glyphicon glyphicon-thumbs-down" ng-click="dislikeChatClick();"></span>
+								</span>
+							</span> -->
+
+						<!-- <div class="loader_msg" ng-show="showMsgLoader">
+								<div class="loading">Typing</div>
+							</div> -->
+						<div class="input-group chatinputgroup" ng-controller="SpeechRecognitionController as speech">
+							<input type="text" class="form-control chatinput" ng-disabled="!gotsession" ng-change="getAutocomplete(chatText);" ng-model="chatText" id="userMsg"
+							    placeholder="What do you want to know?" typeahead="list for list in autocompletelist" ng-keyup="onKeyUp($event)" x-webkit-speech
+							    autocomplete="off" ng-disabled="!selectedapp" />
+							<!--<div class="input-group-addon" ng-if="(browser == 'chrome' || browser == 'android')" ng-speech-recognition-start="" ng-speech-recognition-end="speech.displayTranscript()">
+								<span id="tooltip12" class="speechtotext fa fa-microphone fa-3" href="#" tooltip-placement="left" uib-tooltip="Hold to start,release to send"></span>
+								
+							</div>-->
+							<div class="input-group-addon" id="startBtn">
+								<span id="tooltip12" class="speechtotext fa fa-microphone fa-3" href="#" tooltip-placement="left" uib-tooltip="Hold to start,release to send"></span>
+								<!-- <span class="speechtotext"  >
+										<i class="fa fa-microphone fa-3"></i>
+										
+									</span> -->
+							</div>
+							<audio controls class="hidden ttsaudio" id="ttsaudio" src="">
+
+							</audio>
+						</div>
+						<!--<input type="hidden"  name="user_id" id="user_id"  value="{{sessionId}}" />-->
+						<div id="autocomplete_field"></div>
+						<div id="field_val"></div>
+						<div id="field_id"></div>
+					</div>
+					<a id="mybtn_trigger" class="hidden" ng-click="Speaktext(text);">Speakme</a>
+					<div id="suggestionList">
+						<ul ng-if="autocompletelist.length > 0" class="{{autocompletelist.length}}  ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
+						    id="ui-id-1">
+							<div class="ui-menu-item-wrapper">
+								 <li class="ui-menu-item autolist" data-id="{{list._id}}" data-value="{{list.questions}}" ng-repeat="list in autocompletelist | filter:chatText  " ng-click="pushMsg(list._id,list.questions,backendurl);" ng-bind-html="getcontent(list.questions) | highlight:chatText">{{list.questions}}</li> 
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

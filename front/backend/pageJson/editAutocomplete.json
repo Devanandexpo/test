@@ -1,0 +1,56 @@
+{
+    "title": "Edit Auto Prompt",
+    "name": "Auto Prompt",
+    "jsonPage": "viewAutocomplete",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Query",
+        "type": "text",
+        "tableRef": "questions",
+        "placeholder": "Enter Query",
+        "id": "questions",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "App",
+        "type": "tags",
+        "dropDownType": "single",
+        "dropDownField": "appname",
+        "tableRef": "qlikapp",
+        "searchApi": "searchCall",
+        "placeholder": "Select App",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": "Qlikapp/search"
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitQlikapp",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewAutocomplete"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewAutocomplete"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Chatbotautocomplete/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "Chatbotautocomplete/getOne",
+        "params": "_id"
+    }
+
+}

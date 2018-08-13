@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Select Date</h3>
+    <button type="button" class="close"  aria-hidden="true" ng-click="datefcancel();">&times;</button>
+</div>
+<div class="modal-body datemodal" id="modal-body">
+	<iframe  ng-src="{{trustSrcwithticket(items)}}" class="dateframe" ></iframe>
+</div>
+<div class="modal-footer hidden">
+    <button class="btn btn-primary" type="button" ng-click="">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="">Cancel</button>
+</div>

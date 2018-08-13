@@ -1,0 +1,71 @@
+{
+    "title": "Create Qlik User",
+    "name": "User",
+    "jsonPage": "viewQlikuser",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Chatbotuser"],
+    "fields": [{
+        "name": "Fname",
+        "type": "text",
+        "tableRef": "fname",
+        "placeholder": "Enter First Name",
+        "id": "fname",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Lname",
+        "type": "text",
+        "tableRef": "lname",
+        "placeholder": "Enter Last Name",
+        "id": "lname",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Email",
+        "type": "text",
+        "tableRef": "email",
+        "placeholder": "Enter Email",
+        "id": "email",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Password",
+        "type": "password",
+        "tableRef": "password",
+        "placeholder": "Enter password",
+        "id": "password",
+        "validation": ["", "trim", ""],
+        "url": ""
+    },{
+        "name": "Userid",
+        "type": "text",
+        "tableRef": "userid",
+        "placeholder": "Enter UserID",
+        "id": "userid",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    } ],
+    "action": [{
+        "name": "submit",
+        "action": "submitUser",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikuser"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikuser"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Chatbotuser/save"
+    }
+}

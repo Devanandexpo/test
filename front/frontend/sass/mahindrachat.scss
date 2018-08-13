@@ -1,0 +1,146 @@
+$red : #e32b3a;
+#chat_window_1 {  
+    position: fixed;
+    bottom: 0;
+    right:12px;
+    width: 500px;
+    .floating_logo{
+        position: absolute;
+z-index: 1;
+bottom: 0;
+right: 0;
+width: 20vh;
+opacity: .7;
+    }
+}
+
+.mahindra_chat{
+    .panel-primary > .panel-heading{
+        color: #fff;
+    // background-color: #003874;
+    background: $red;
+    border-color: $red;
+    display: flex;
+    align-items: flex-start;
+    padding: 0px;
+    // height: 55px;
+    position: relative;
+    z-index: 1;
+    }
+
+    .mahindra_logo{
+        // width: 20rem;
+        width: 115px;
+        img{
+            // height: 12rem;
+        }
+    }
+  
+    .panel-heading{
+        #chatTabs{
+            align-self: flex-end;
+            // border:none;
+                 border-bottom: 1px solid #ddd; 
+                 margin-left: 3px;
+             li a{
+                padding: 5px 8px;
+                font-size: 11px;
+                color: white;
+                background: $red;
+                border: 1px solid white;
+                margin: 0px 1px;
+
+                &:hover{
+                    background: white;
+                    color:black;
+                }
+             }
+             li.active{
+                 a{
+                     background:white;
+                     color:black;
+                 }
+             }
+        }
+    }
+
+    .panel-right{
+        position: absolute;
+        right: 10px;
+        bottom: 0px;
+
+        .icon_close{
+            font-size: 16px;
+        }
+        .lastlogin{
+            font-size: 20px;
+        }
+    }
+    .login{
+        border:1px solid $red;
+        width: 85%;
+        margin: 0 auto;
+        margin-top: 25%;
+        .login_text{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    }
+
+    .panel-body{
+        background-image: url('../img/lowpoly_bg.jpg');
+        background-position: 100% 100%;
+    }
+
+}
+
+.panel-primary{
+    border-color: $red;
+}
+
+.form-control:focus{
+    border-color: $red;
+}
+
+p.faq_ques a, .faqmore p a{
+    color:$red !important;
+}
+.btn-info:focus, .btn-info.focus{
+    color: #fff;
+    background-color: $red;
+    border-color: $red;
+}
+
+.btn-info{
+    border-color: $red;
+    color:$red;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: $red;
+    border-color: $red;
+}
+
+
+.powerbybottom{
+bottom:20px;
+}
+
+.right .chat-body{
+    background: gray;
+}
+
+.right .chat-body:before{
+    border: 5px solid gray;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+ .qlik_logo{
+     img{
+        width:100px;
+     }
+   
+}

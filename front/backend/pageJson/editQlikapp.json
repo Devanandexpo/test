@@ -1,0 +1,88 @@
+{
+    "title": "Edit App",
+    "name": "Qlik App",
+    "jsonPage": "viewQlikapp",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Appid",
+        "type": "text",
+        "tableRef": "appid",
+        "placeholder": "Enter APP ID",
+        "id": "appid",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Appname",
+        "type": "text",
+        "tableRef": "appname",
+        "placeholder": "Enter App Name",
+        "id": "appname",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Dashboardurl",
+        "type": "text",
+        "tableRef": "dashboardurl",
+        "placeholder": "Enter Dashboard URL",
+        "id": "dashboardurl",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    },{
+        "name": "Selectionurl",
+        "type": "text",
+        "tableRef": "selectionurl",
+        "placeholder": "Enter Selection URL",
+        "id": "selectionurl",
+        "validation": ["", "trim"],
+        "url": ""
+    },{
+        "name": "Backendurl",
+        "type": "text",
+        "tableRef": "backendurl",
+        "placeholder": "Enter Backend URL",
+        "id": "backendurl",
+        "validation": ["", "trim"],
+        "url": ""
+    },{
+        "name": "App user",
+        "type": "tags",
+        "dropDownType": "multiple",
+        "dropDownField": "userid",
+        "tableRef": "userapp",
+        "searchApi": "searchCall",
+        "placeholder": "Select User",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": "Chatbotuser/searchqlikuser"
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitQlikapp",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikapp"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikapp"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Qlikapp/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "Qlikapp/getOne",
+        "params": "_id"
+    }
+
+}

@@ -1,0 +1,71 @@
+{
+    "title": "Create Qlik App",
+    "name": "App",
+    "jsonPage": "viewQlikapp",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Qlikapp"],
+    "fields": [{
+        "name": "Appid",
+        "type": "text",
+        "tableRef": "appid",
+        "placeholder": "Enter APP ID",
+        "id": "appid",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Appname",
+        "type": "text",
+        "tableRef": "appname",
+        "placeholder": "Enter App Name",
+        "id": "appname",
+        "validation": ["required", "trim"],
+        "url": ""
+    },{
+        "name": "Dashboardurl",
+        "type": "text",
+        "tableRef": "dashboardurl",
+        "placeholder": "Enter Dashboard URL",
+        "id": "dashboardurl",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    },{
+        "name": "Selectionurl",
+        "type": "text",
+        "tableRef": "selectionurl",
+        "placeholder": "Enter Selection URL",
+        "id": "selectionurl",
+        "validation": ["", "trim"],
+        "url": ""
+    },{
+        "name": "Backendurl",
+        "type": "text",
+        "tableRef": "backendurl",
+        "placeholder": "Enter Backend URL",
+        "id": "backendurl",
+        "validation": ["", "trim"],
+        "url": ""
+    } ],
+    "action": [{
+        "name": "submit",
+        "action": "submitQlikapp",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikapp"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewQlikapp"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Qlikapp/save"
+    }
+}

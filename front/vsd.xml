@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="RJS">
+    <CommandPrefix>MyApp</CommandPrefix>
+    <Example>MyApp search for foo</Example>
+    <Command Name="Search">
+      <Example>search {message} using myapp</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">Search for {searchTerm}</ListenFor>
+      <Feedback>Searching for {searchTerm} with MyApp</Feedback>
+      <Navigate Target="/search.htm"/>
+    </Command>
+    <PhraseTopic Label="searchTerm" Scenario="Dictation"></PhraseTopic>
+  </CommandSet>
+</VoiceCommands>

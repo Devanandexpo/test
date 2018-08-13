@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Apps</h3>
+    <button type="button" class="close"  aria-hidden="true" ng-click="selectappCancel();">&times;</button>
+</div>
+<div class="modal-body" id="modal-body">
+    <form id="selectapp_form" name="selectapp_form">
+        <div class="form-group">
+            <div class="pull-left" ng-if="selectappSuccess==1">
+                <span class="label label-success" >Thank You.</span>
+            </div>
+            <!-- <div ng-repeat="i in items">
+                {{i.name}}
+            </div> -->
+            <!-- <select class="form-control selectapp_list" id="selectapp_list" >
+
+            </select> -->
+            <select id="selectapp_list" name="selectapp_list"  ng-options="cat as cat.appname for cat in items" ng-model="user.selectapp" class="form-control"  required>
+                                    
+            </select>
+            <div class="pull-right" ng-repeat="(field,value) in selectapp_form.selectapp.$error" ng-show="selectapp_form.selectapp.$touched">
+                <span class="label label-danger" ng-if="value">Please Select</span>
+            </div>
+            
+            
+            <div class="pull-right"  ng-if="selectapperror==-1">
+                <span class="label label-danger">Please Select</span>
+            </div>
+            
+            <input class="form-control" id='selectappsubmit' type="submit" name="selectappsubmit" ng-disabled="selectapp_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Submit" ng-click="getApp(user.selectapp,0);">
+        </div>
+    </form>
+</div>
+<div class="modal-footer hidden">
+    <button class="btn btn-primary" type="button" ng-click="">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="">Cancel</button>
+</div>
